@@ -15,11 +15,14 @@ def get_cid(bvid):
     response = requests.get(url, headers=headers)
     data = response.json()
     cid = data['data']['cid']
+
+    """
     # 将Python对象转化为JSON格式的字符串，并输出
     print(json.dumps(data, indent=4, ensure_ascii=False))
     print(cid)
 
     return cid
+    """
 
 def get_danmu(cid):
     """获取弹幕"""
