@@ -1,7 +1,7 @@
 # 弹幕词云生成器
 Get bullet chat from bilibili.com by crawler and make word cloud
 
-这是一个用于从 bilibili.com 爬取弹幕并生成词云的 Python 项目
+这是一个从 bilibili.com 爬取弹幕并生成词云的 Python 项目
 
 效果预览:
 
