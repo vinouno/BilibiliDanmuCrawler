@@ -14,14 +14,16 @@ def get_cid(bvid):
     }
     response = requests.get(url, headers=headers)
     data = response.json()
-    cid = data['data']['cid']
+    pages = data['data']['pages']
+    cids = []
+    for page in pages:
+        cids.append(page['cid'])
+    return cids
 
     """
     # 将Python对象转化为JSON格式的字符串，并输出
     print(json.dumps(data, indent=4, ensure_ascii=False))
     print(cid)
-
-    return cid
     """
 
 def get_danmu(cid):
@@ -89,9 +91,11 @@ def word_cloud_generator(json_name):
 
 if __name__ == '__main__':
     bvid = 'BV1xc41157mK' # 将BV1RK41117gZ替换成你需要获取弹幕的视频的bv号
-    cid = get_cid(bvid)
-    danmu_list = get_danmu(cid)
-    json_name = 'danmu_'+ bvid +'.json'
-    with open(json_name, 'w', encoding='utf-8') as f:
-        json.dump(danmu_list, f, ensure_ascii=False, indent=4)
-    word_cloud_generator(json_name)
+    cid_list = get_cid(bvid)
+    print(cid_list)
+    for i, cid in enumerate(cid_list):
+        danmu_list = get_danmu(cid)
+        json_name = 'danmu_'+ bvid + '_ p'+ str(i+1) +'.json'
+        with open(json_name, 'w', encoding='utf-8') as f:
+            json.dump(danmu_list, f, ensure_ascii=False, indent=4)
+        word_cloud_generator(json_name)
